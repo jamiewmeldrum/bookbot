@@ -1,4 +1,10 @@
-from stats import get_word_count, get_characters, sort_characters, filter_non_alphabet
+import sys
+from stats import (
+    get_word_count, 
+    get_characters, 
+    sort_characters, 
+    filter_non_alphabet
+)
 
 def get_book_text(filepath):
     with open(filepath) as f:
@@ -22,12 +28,21 @@ def print_report(book, word_count, characters):
     print("============= END ===============")
 
 def main():
-   book = "books/frankenstein.txt"
-   words = get_book_text(book)
-   word_count = get_word_count(words)
-   characters = get_characters(words)
-   characters = filter_non_alphabet(characters)
-   sort_characters(characters)
-   print_report(book, word_count, characters)
+   
+    # Ensure that a book title is provided
+    sys_args = sys.argv
+    if len(sys_args) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    # Get book title from cmb line args
+    book = sys_args[1]
+
+    words = get_book_text(book)
+    word_count = get_word_count(words)
+    characters = get_characters(words)
+    characters = filter_non_alphabet(characters)
+    sort_characters(characters)
+    print_report(book, word_count, characters)
    
 main()
