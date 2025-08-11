@@ -6,13 +6,12 @@ def get_character_count_dict(text):
 
     character_dict = {}
 
-    characters = list(text)
-    for character in characters:
-        character = str.lower(character)
+    for character in text:
+        character = character.lower()
 
-        count = character_dict.get(character)
-        if count is None:
-            count = 0
-        character_dict.update({character: count + 1})
+        if character in character_dict:
+            character_dict[character] += 1
+        else:
+            character_dict[character] = 1
 
     return character_dict
